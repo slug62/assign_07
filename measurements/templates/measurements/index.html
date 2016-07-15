@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Measurements Home Page</title>
+</head>
+<body>
+
+<h1>List of Areas</h1>
+
+{% if area_objects %}
+
+    <table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Number of Locations</th>
+        <th>Aveage Measurement</th>
+        <th>Categories</th>
+    </tr>
+
+{% for area in area_objects %}
+
+    <tr>
+        <td>{{ area.id }}</td>
+        <td>{{ area.name }}</td>
+        <td>{{ area.number_of_locations }}</td>
+        <td>{{ area.average_measurement }}</td>
+        <td>{{ area.category_names }}</td>
+    </tr>
+
+{% endfor %}
+
+</table>
+
+{% endif %}
+
+
+</body>
+</html>
