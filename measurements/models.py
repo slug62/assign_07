@@ -8,25 +8,28 @@ class Area(models.Model):
     latitude = models.FloatField(default=0.0)
 
     def number_of_locations(self):
-        return len(Location.objects.filter(area=self.id))
+        return len(self.location_set.all())
 
     def average_measurement(self):
         avg = 0
-        locations = Location.objects.filter(area=self.id)
-        measurement_values = []
+        locations = self.location_set.all()
+        sum = 0
+        counter = 0
         for l in locations:
-            measurement_values.append(Measurement.objects.filter(location=l.id))
-        for m in measurement_values:
-            for i in range(m):
-                avg = sum(m[i].value)
-        #avg = sum(measurement_values[1].value)
+            measurement = l.measurement_set.all()
+            if measurement:
+                for m in measurement:
+                    sum += m.value
+                    counter += 1
+        if counter != 0:
+            avg = sum / counter
         return avg
 
     def category_names(self):
-        catagories = Category.objects.filter(members=self.id)
+        catagories = self.category_set.all()
         clist = ""
         for c in catagories:
-            clist += c.name + ','
+            clist += c.name + ', '
         return clist
 
     def __str__(self):
@@ -50,7 +53,7 @@ class Measurement(models.Model):
     location = models.ForeignKey(Location, on_delete=None)
 
     def __str__(self):
-        return 'Measurement@' + self.location
+        return 'Measurement@' + self.location.name
 
 
 class Category(models.Model):
