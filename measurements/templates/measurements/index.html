@@ -25,7 +25,7 @@
         <td>{{ area.id }}</td>
         <td>{{ area.name }}</td>
         <td>{{ area.number_of_locations }}</td>
-        <td>{{ area.average_measurement }}</td>
+        <td>{{ area.average_measurement|floatformat:3 }}</td>
         <td>{{ area.category_names }}</td>
     </tr>
 

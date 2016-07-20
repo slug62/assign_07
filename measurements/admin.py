@@ -21,7 +21,7 @@ class LocationAdmin(admin.ModelAdmin):
     ]
 
 class CategoryAdmin(admin.ModelAdmin):
-    fields = ['id', ]
+    fields = ['id', 'name', 'members', 'description']
     filter_vertical = ['members']
 
 admin.site.register(Area, AreaAdmin)
